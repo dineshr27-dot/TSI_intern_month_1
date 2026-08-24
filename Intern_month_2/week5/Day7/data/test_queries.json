@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "question": "What is RAG?",
+        "context": "Retrieval-Augmented Generation (RAG) is a technique that retrieves relevant information from a knowledge source and provides it to a language model to generate an answer."
+    },
+    {
+        "id": 2,
+        "question": "What is an embedding?",
+        "context": "An embedding is a numerical vector representation of data such as text. Similar meanings are represented by vectors that are close to each other."
+    },
+    {
+        "id": 3,
+        "question": "What is a vector database?",
+        "context": "A vector database stores vector embeddings and allows applications to search for vectors that are similar to a query vector."
+    },
+    {
+        "id": 4,
+        "question": "What is chunking?",
+        "context": "Chunking is the process of splitting a large document into smaller pieces of text so that the pieces can be processed and retrieved efficiently."
+    },
+    {
+        "id": 5,
+        "question": "What is an LLM?",
+        "context": "A Large Language Model (LLM) is a machine learning model trained on large amounts of text to understand and generate human-like language."
+    },
+    {
+        "id": 6,
+        "question": "What is prompt engineering?",
+        "context": "Prompt engineering is the practice of designing instructions for language models to obtain useful, accurate, and consistent outputs."
+    },
+    {
+        "id": 7,
+        "question": "What is LangChain?",
+        "context": "LangChain is a framework that helps developers build applications using language models, prompts, tools, retrieval systems, and agents."
+    },
+    {
+        "id": 8,
+        "question": "What is FAISS?",
+        "context": "FAISS is a library developed by Meta for efficient similarity search and clustering of dense vectors."
+    },
+    {
+        "id": 9,
+        "question": "What is cosine similarity?",
+        "context": "Cosine similarity measures the similarity between two vectors based on the angle between them."
+    },
+    {
+        "id": 10,
+        "question": "What is hallucination in an LLM?",
+        "context": "An LLM hallucination occurs when a language model generates information that is incorrect, unsupported, or not present in the available information."
+    }
+]
