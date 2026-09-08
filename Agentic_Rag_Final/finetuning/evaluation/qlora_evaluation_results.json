@@ -1,0 +1,162 @@
+[
+    {
+        "question_id": 1,
+        "question": "Can you recommend some shows similar to The Daily Show?",
+        "expected_answer": "Yes! Some popular comedy shows that are similar to The Daily Show include Last Week Tonight with John Oliver, The Late Show with Stephen Colbert, and The Daily Show with Trevor Noah.  These shows all feature humorous news commentary in a satirical format, and they cover a range of topics including politics, current events, and pop culture.  They\n",
+        "qlora_answer": "Sure! Here are some shows that are similar to The Daily Show:\n\n- Saturday Night Live\n\n- The Colbert Report\n\n- The Daily Show with Jon Stewart\n\n- The Daily Show with Trevor Noah\n\n- The Daily Show with Chris Rock\n\n- The Daily Show with Jon Stewart\n\n- The Daily Show with Jon Stewart\n\n- The Daily Show with Jon Stewart\n\n- The Daily Show with Jon Stewart\n\n- The Daily Show with Jon Stewart\n\n- The Daily Show with Jon Stewart\n\n- The Daily Show with Jon Stewart\n\n- The Daily Show with Jon Stewart\n\n- The Daily Show with Jon Stewart\n\n- The Daily Show with Jon Stewart",
+        "exact_match": false,
+        "similarity_score": 8.72
+    },
+    {
+        "question_id": 2,
+        "question": "Could you help teach me how to make peanut butter cookies?",
+        "expected_answer": "Sure, let’s get started!  The first thing I want you to do is make sure you’ve got all the ingredients in your kitchen.\n",
+        "qlora_answer": "Sure! Here’s a basic recipe for peanut butter cookies:\n\nIngredients:\n- 1 cup all-purpose flour\n- 1/2 teaspoon baking soda\n- 1/4 teaspoon salt\n- 1/2 cup unsalted butter, softened\n- 1/2 cup granulated sugar\n- 1/2 cup packed brown sugar\n- 1 large egg\n- 1/2 cup creamy peanut butter\n- 1 teaspoon vanilla extract\n\nInstructions:\n1. Preheat oven to 350°F (175°C).\n2. In a medium bowl, whisk together flour, baking soda, and",
+        "exact_match": false,
+        "similarity_score": 6.8
+    },
+    {
+        "question_id": 3,
+        "question": "How can you survive an earthquake?",
+        "expected_answer": "First of all, you should be prepared.  Make sure you know where the closest safe room is, and be sure you know how to get there.  Make sure you also have a disaster preparedness kit.  This includes things like water, a flashlight, batteries, first-aid kits, etc.  Make sure your home is properly prepared as well.  Have earthquake retrofitting done, if needed.  Make sure your home is well-built and can withstand an earthquake.  Make sure your emergency supplies are well-stocked.  Make sure everyone in the house is aware of what to do in an earthquake.\n",
+        "qlora_answer": "Here are some tips to help you survive an earthquake:\n\n1. Stay calm: Try to remain calm and avoid panic.\n\n2. Drop to the ground: If you're indoors, drop to the ground and take cover under a sturdy table or desk.\n\n3. Cover your head: Protect your head with your hands or a pillow.\n\n4. Hold on: If you're outdoors, hold on to something sturdy and stay away from trees, power lines, and other potential hazards.\n\n5. Move away from buildings: If you're in an area where buildings are likely to collapse, move away from them.\n\n6. Check for injuries: After the",
+        "exact_match": false,
+        "similarity_score": 8.87
+    },
+    {
+        "question_id": 4,
+        "question": "What is an iconoclast?",
+        "expected_answer": "An \"iconoclast\" is someone who attacks cherished beliefs or institutions.  An iconoclast is someone who seeks out and criticizes established traditions for the sake of change and progress.  Iconoclasts typically regard the values and traditions of the society around them as dispensable and outdated.\n",
+        "qlora_answer": "An iconoclast is someone who attacks or destroys religious icons or other symbols of religion. The term comes from the Greek word \"eikon,\" which means \"image\" or \"icon.\" Iconoclasts often criticize or oppose religious beliefs and practices, and may view them as oppressive or outdated. They may also challenge traditional religious teachings and practices, such as the veneration of saints or the belief in miracles. Iconoclasts can be found in many different religious traditions, including Christianity, Islam, Judaism, Hinduism, and Buddhism, among others.",
+        "exact_match": false,
+        "similarity_score": 9.16
+    },
+    {
+        "question_id": 5,
+        "question": "Leo Tolstoy was quite a writer. How long were most of his works, page wise, roughly?",
+        "expected_answer": "Probably this book-length article will answer your question:\n\nThe novel [War and Peace] is one of the longest novels ever written and one of the largest ever published; Tolstoy produced more than 200,000 words in it. This is also one of the most widely read novels ever. The three parts of the novel were first published serially in The Russian Messenger, one of the major Russian newspapers of the time.\n",
+        "qlora_answer": "Leo Tolstoy wrote many books, but most of them were novels. The average length of his novels was about 1000 pages.",
+        "exact_match": false,
+        "similarity_score": 8.84
+    },
+    {
+        "question_id": 6,
+        "question": "Which is a species of fish? Blenny or Benny",
+        "expected_answer": "Blenny",
+        "qlora_answer": "Blenny",
+        "exact_match": true,
+        "similarity_score": 10.0
+    },
+    {
+        "question_id": 7,
+        "question": "How is someone diagnosed with autism?",
+        "expected_answer": "Autism Spectrum Disorder (ASD) is a general diagnosis of a collection of conditions with varying symptoms, but which tend to share some key features. There’s some recent debate about exactly how this set of conditions should be labeled, but I think it makes sense to say that ASD is “on a spectrum”, like how the physical features of autistic people can vary along a continuum.  The diagnosis of ASD can be made through observation of the patient’s behavior and interactions, as well as observations of social functioning and emotional development.\n",
+        "qlora_answer": "Autism spectrum disorder (ASD) is a neurodevelopmental condition that affects how a person communicates and interacts with others, as well as their ability to learn and use language. The diagnosis of ASD is based on a comprehensive evaluation by a qualified professional who assesses the individual's behavior, social skills, communication abilities, and cognitive functioning.\n\nThe diagnostic process typically involves:\n\n1. Clinical interview: A healthcare provider or psychologist conducts a detailed assessment of the individual's symptoms, behaviors, and developmental history.\n2. Observation: The professional observes the individual in various settings, such as home, school, and community activities, to gather information about their",
+        "exact_match": false,
+        "similarity_score": 9.29
+    },
+    {
+        "question_id": 8,
+        "question": "When was the Philippine House Committee elevated into a standing committee\nThe Philippine House Committee on Sustainable Development Goals, or House Sustainable Development Goals Committee is a standing committee of the Philippine House of Representatives.\n\nOriginally designated as a special committee, it was elevated into a standing committee on March 10, 2020.[1]",
+        "expected_answer": "The Philippine House Committee on Sustainable Development Goals, or House Sustainable Development Goals Committee is a standing committee of the Philippine House of Representatives.\n\nOriginally designated as a special committee, it was elevated into a standing committee on March 10, 2020.",
+        "qlora_answer": "March 10, 2020",
+        "exact_match": false,
+        "similarity_score": 5.94
+    },
+    {
+        "question_id": 9,
+        "question": "What is Fibonacci series",
+        "expected_answer": "Fibonacci series is a sequence where every number is the sum of the 2 preceding numbers. The series commonly starts form 0 and the first few numbers are 0,1,1,2,3,5,8,13,21....",
+        "qlora_answer": "The Fibonacci sequence is a series of numbers where each number is the sum of the two preceding ones. The sequence starts with 0 and 1, and then each subsequent number is the sum of the two preceding ones. The sequence goes as follows: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584,",
+        "exact_match": false,
+        "similarity_score": 9.72
+    },
+    {
+        "question_id": 10,
+        "question": "Can a student get a credit card?",
+        "expected_answer": "Sure. There are two main ways to get a credit card. One is to get one as a student. You can open a credit card account as a student, if you have a cosigner who’s also an adult. As a student, you’ll get a regular, student-only card, which will come with lower credit limits and higher interest rates. You won’t be able to open the card by yourself. You’ll need a cosigner who agrees to make any payments for you if you can’t. But credit cards as students are a good way to start building a credit history, and many universities offer a credit card as an additional fee, so you don’t have to worry about getting approved or paying interest.  The other way to get a credit card is to be an adult. For that, you’ll need to prove your identity and that you can pay for your purchases, which means a valid bank account or a utility bill, as well as your social security number. You’ll need to take out a loan in order to have enough money in your bank account to cover your spending limit, or you’ll have to have a very high income if you’re able to prove it, which usually means a salary from\n",
+        "qlora_answer": "Yes, students can get a credit card. However, they may need to meet certain criteria such as having a good credit history, being at least 18 years old, and having a steady income.",
+        "exact_match": false,
+        "similarity_score": 8.98
+    },
+    {
+        "question_id": 11,
+        "question": "I'm camping and I feel cold. What can I do?",
+        "expected_answer": "Make sure you're wrapped up warm and stay dry. Make sure your campfire is big enough to give you some warmth. You can also bring along a small heater if you want extra warmth. Make sure you're sitting close enough to the fire. It's also a good idea to have a hot water bottle or hot pack if you want some extra warmth.\n",
+        "qlora_answer": "You could try to find a warm spot in your tent, or you could try to get some firewood from the campsite. You could also try to build a fire if you have matches or a lighter.",
+        "exact_match": false,
+        "similarity_score": 8.28
+    },
+    {
+        "question_id": 12,
+        "question": "Do political reps like Nancy Pelosi have term limits?",
+        "expected_answer": "Yes, there are term limits for Congressional representatives. Rep. Nancy Pelosi, the current Speaker of the House of Representatives, is limited to two terms in office. The current term limit for Congressional representatives is six years. If Nancy Pelosi is re-elected on November 6, she will be prohibited from seeking re-election in 2022. Rep. Pelosi previously served as House Minority Leader from 2007-2011, House Minority Whip from 2002-2007, and House Minority Leader from 2001-2002.\n",
+        "qlora_answer": "Nancy Pelosi is a member of the Democratic Party and has been serving as Speaker of the House since 2019. She was elected to the House in 1987 and has served as Speaker since 2019. There is no set term limit for members of Congress, but there are some restrictions on how long they can serve. For example, members of the House can only serve two terms, and members of the Senate can only serve six years.",
+        "exact_match": false,
+        "similarity_score": 9.13
+    },
+    {
+        "question_id": 13,
+        "question": "How do I hold a silent auction?",
+        "expected_answer": "In a silent auction, each participant secretly bids on an item.  The highest bidder wins.\n",
+        "qlora_answer": "To hold a silent auction, you will need to follow these steps:\n\n1. Choose a theme: Decide on a theme for your silent auction, such as a charity event, a fundraiser, or a holiday celebration.\n\n2. Create items: Gather items that people can bid on, such as artwork, jewelry, furniture, or other unique items.\n\n3. Set a price range: Determine a price range for each item, so that bidders know how much they should be willing to pay.\n\n4. Prepare the auction: Make sure all of the items are displayed in a prominent location, and have a designated area for bidding.\n\n5. Start",
+        "exact_match": false,
+        "similarity_score": 8.28
+    },
+    {
+        "question_id": 14,
+        "question": "Who is directing the new Batman movie?",
+        "expected_answer": "No idea.  Google it.\n",
+        "qlora_answer": "The new Batman movie is directed by Matt Reeves.",
+        "exact_match": false,
+        "similarity_score": 5.44
+    },
+    {
+        "question_id": 15,
+        "question": "Is having bad teeth a genetic thing?",
+        "expected_answer": "Yes, some people are more likely to have problems with their teeth than others, and some people are more likely to develop problems with their teeth over time.\n",
+        "qlora_answer": "Yes, genetics plays a significant role in determining your dental health. Some people are more prone to developing certain oral health issues due to their genetic makeup. For example, some people may be more susceptible to tooth decay or gum disease because of their genetic predisposition. However, it's important to note that lifestyle factors such as diet, smoking, and stress can also impact your dental health.",
+        "exact_match": false,
+        "similarity_score": 8.49
+    },
+    {
+        "question_id": 16,
+        "question": "Can you explain to me how gravity works?",
+        "expected_answer": "Sure, you can consider gravity a force that pulls things together.  That is, it’s a force that acts on objects, but it isn’t like a magnet or a chemical reaction.  You know, it’s not a thing that’s pushing or pulling against other things to change their location.  Gravity pulls things together, so that means that if you were to see an apple floating in space you would know that there must be another object present that it’s being attracted to.  So gravity acts like a force, but it’s actually like an elastic band that pulls things together, and if you apply enough force to the apple it’ll start to move towards the other object.  You might think that if gravity only acted on solid objects it wouldn’t be very powerful, but it’s actually extremely powerful because it acts on anything that has mass, which means that it could act on light objects or even the energy present in photons or electrons.  This allows us to account for phenomena like black holes, where lots of matter gets crammed into such a tiny space that it gets completely crushed under its own gravitational force, or the event horizon.\n",
+        "qlora_answer": "Sure! Gravity is a force that attracts two objects towards each other. The strength of the force depends on the mass of the objects and the distance between them. The stronger the mass of an object, the stronger the gravitational pull it exerts on other objects. The farther apart two objects are, the weaker the gravitational pull.",
+        "exact_match": false,
+        "similarity_score": 8.69
+    },
+    {
+        "question_id": 17,
+        "question": "Which Baseball team won the 2016 World Series?",
+        "expected_answer": "The Chicago Cubs won the World Series of Baseball in 2016.",
+        "qlora_answer": "The 2016 World Series was played between the Houston Astros and the Cleveland Indians. The Astros won the series in five games.",
+        "exact_match": false,
+        "similarity_score": 8.46
+    },
+    {
+        "question_id": 18,
+        "question": "which is better, kool aid or flavor aid?",
+        "expected_answer": "Kool-Aid is better, because it’s fruit flavored, whereas flavor aid is just regular sugar.  Kool-Aid has more flavor, and makes drinks taste more natural.  And because it’s fruit flavored, it’s better for kids.\n",
+        "qlora_answer": "Kool-Aid is a popular brand of flavored drink mix that has been around since the 1950s. It is made from sugar, flavoring, and other ingredients, and comes in various flavors such as cherry, orange, lemon, and lime. Kool-Aid is often used as a party food or snack, and can be served hot or cold.\n\nFlavor Aid is a brand of flavored drink mix that was introduced in 2018. It is also made from sugar, flavoring, and other ingredients, and comes in various flavors such as cherry, orange, lemon, and lime. Flavor Aid",
+        "exact_match": false,
+        "similarity_score": 9.0
+    },
+    {
+        "question_id": 19,
+        "question": "What are some coping strategies for someone to use during a panic attack?",
+        "expected_answer": "There are many effective self-help techniques for coping with panic attacks, including deep breathing and relaxation exercises, which you can practice at home each day.  Similarly, you can talk through your feelings with a trusted friend or family member, and learn how to reduce your situational triggers for panic attacks.  If you’re having a panic attack, it’s also important to seek medical attention.  Talk to your primary care physician about your symptoms.\n",
+        "qlora_answer": "Here are some coping strategies that can be used during a panic attack:\n\n1. Focus on your breathing: Try to slow down your breathing by taking deep breaths in through your nose and out through your mouth.\n\n2. Count slowly: Count to 10 slowly while breathing deeply.\n\n3. Visualize a calming scene: Imagine yourself in a peaceful place, such as a beach or a forest, and focus on the details of the scene.\n\n4. Use grounding techniques: Focus on your senses and try to identify five things you can see, three things you can touch, two things you can hear, one thing you can smell, and",
+        "exact_match": false,
+        "similarity_score": 9.23
+    },
+    {
+        "question_id": 20,
+        "question": "What is the capital of Japan?",
+        "expected_answer": "Tokyo is the capital of Japan.",
+        "qlora_answer": "Tokyo",
+        "exact_match": false,
+        "similarity_score": 8.53
+    }
+]

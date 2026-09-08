@@ -22,3 +22,7 @@ pypdf
 wikipedia
 ddgs
 groq
+
+peft
+bitsandbytes>=0.46.1
+datasets

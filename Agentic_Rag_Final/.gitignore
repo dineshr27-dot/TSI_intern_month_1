@@ -1,6 +1,34 @@
-# Created by venv; see https://docs.python.org/3/library/venv.html
+# Environment variables
 .env
+
+# Python virtual environments
+.venv/
+venv/
 myvenv/
+
+# Python cache
 __pycache__/
 *.pyc
+*.pyo
+
+# Chroma databases
 chroma_db/
+chroma_db_new/
+
+# Fine-tuning model outputs
+finetuning/output/
+
+# Fine-tuning datasets
+finetuning/data/train_dataset/
+finetuning/data/test_dataset/
+finetuning/data/processed_dataset/
+
+# Training checkpoints
+finetuning/checkpoint-*/
+
+# Python generated files
+*.log
+
+# IDE
+.vscode/
+.idea/

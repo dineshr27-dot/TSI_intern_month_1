@@ -1,0 +1,32 @@
+{
+    "model": "Fine-tuned Qwen QLoRA",
+    "evaluation_method": "SentenceTransformer semantic similarity",
+    "semantic_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "questions_evaluated": 20,
+    "exact_matches": 1,
+    "average_semantic_similarity": 8.492576863616705,
+    "pass_threshold": 8.0,
+    "result": "PASS",
+    "individual_scores": [
+        8.719754815101624,
+        6.804305613040924,
+        8.871462941169739,
+        9.157203733921051,
+        8.838319778442383,
+        10.0,
+        9.287877380847931,
+        5.935685858130455,
+        9.720828533172607,
+        8.975594341754913,
+        8.281908631324768,
+        9.131492972373962,
+        8.284791707992554,
+        5.444233417510986,
+        8.48788172006607,
+        8.686137199401855,
+        8.459810614585876,
+        8.998658657073975,
+        9.2349374294281,
+        8.530651926994324
+    ]
+}

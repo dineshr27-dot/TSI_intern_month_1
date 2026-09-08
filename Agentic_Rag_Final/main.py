@@ -1,226 +1,126 @@
-from fastapi import FastAPI, HTTPException
-from langchain_core.messages import ToolMessage
+from fastapi import (
+    FastAPI,
+    HTTPException,
+    WebSocket,
+    WebSocketDisconnect,
+)
 
-from agent import agent
+import json
+
+from agent import (
+    run_agent,
+    stream_agent_answer,
+    PROMPT_VERSION,
+)
+
 from schemas import (
     AgentQueryRequest,
     AgentQueryResponse,
-    HistoryItem
+    HistoryItem,
 )
 
 
 # ============================================================
-# 1. FastAPI Application
+# 1. FASTAPI APPLICATION
 # ============================================================
 
 app = FastAPI(
     title="Agentic RAG System",
     description=(
         "Agentic RAG system using Hybrid Retrieval, "
-        "Wikipedia, DuckDuckGo and Joke API"
+        "Wikipedia, DuckDuckGo and Base/Fine-tuned Qwen model"
     ),
-    version="1.0.0"
+    version="2.3.0",
 )
 
 
 # ============================================================
-# 2. System Prompt
-# ============================================================
-
-SYSTEM_PROMPT = """
-You are an Agentic RAG assistant.
-
-Select tools carefully based on the user's question.
-
-AVAILABLE TOOLS
-
-1. search_documents
-Use ONLY when the user explicitly asks about the uploaded documents,
-PDFs, document knowledge base, or information expected to be contained
-in those documents.
-
-2. search_wikipedia
-Use for general factual and encyclopedic questions about people,
-places, history, science, technology, organizations, and concepts.
-
-3. search_duckduckgo
-Use for current, recent, latest, today's, live, or time-sensitive
-information.
-
-4. get_joke
-Use when the user asks for a joke.
-
-TOOL ROUTING RULES
-
-- General knowledge -> search_wikipedia
-- Uploaded document/PDF question -> search_documents
-- Current/latest/today/live information -> search_duckduckgo
-- Joke request -> get_joke
-
-- Do NOT search documents for an ordinary general-knowledge question.
-- Do NOT use Wikipedia when only current information is requested.
-- Do NOT call unrelated tools.
-- Prefer one tool when one tool is sufficient.
-- Use multiple tools ONLY when the user's question genuinely requires
-  information from multiple sources.
-- If the user explicitly asks for document information AND current
-  information, use search_documents and search_duckduckgo.
-- If a tool result is insufficient, another relevant tool may be used.
-- Never invent tool names.
-- Base factual answers on the tool results.
-- If a tool fails, explain briefly or use another relevant tool.
-- Always provide a final answer.
-"""
-
-
-# ============================================================
-# 3. In-Memory History
+# 2. IN-MEMORY HISTORY
 # ============================================================
 
 history: list[HistoryItem] = []
 
 
 # ============================================================
-# 4. Home Endpoint
+# 3. HOME
 # ============================================================
 
 @app.get("/")
 def home():
 
     return {
-        "message": "Agentic RAG API is running"
+        "message": "Agentic RAG API is running",
+
+        "models": {
+            "base": "Qwen/Qwen2.5-1.5B-Instruct",
+            "finetuned": (
+                "Qwen/Qwen2.5-1.5B-Instruct + QLoRA"
+            ),
+        },
+
+        "tools": [
+            "search_documents",
+            "search_wikipedia",
+            "search_duckduckgo",
+        ],
+
+        "websocket": "/ws/agent",
+
+        "prompt_version": PROMPT_VERSION,
     }
 
 
 # ============================================================
-# 5. POST /agent/query
+# 4. NORMAL HTTP QUERY
 # ============================================================
 
 @app.post(
     "/agent/query",
-    response_model=AgentQueryResponse
+    response_model=AgentQueryResponse,
 )
-def query_agent(request: AgentQueryRequest):
+def query_agent(
+    request: AgentQueryRequest,
+):
 
     try:
 
-        # ----------------------------------------------------
-        # Send Query to Agent
-        # ----------------------------------------------------
-
-        response = agent.invoke(
-            {
-                "messages": [
-                    {
-                        "role": "system",
-                        "content": SYSTEM_PROMPT
-                    },
-                    {
-                        "role": "user",
-                        "content": request.query
-                    }
-                ]
-            }
+        result = run_agent(
+            request.query
         )
 
-        # ----------------------------------------------------
-        # Get Messages
-        # ----------------------------------------------------
+        answer = result.get(
+            "answer",
+            "",
+        )
 
-        messages = response.get("messages", [])
+        tools_used = result.get(
+            "tools_used",
+            [],
+        )
 
-        if not messages:
-            raise ValueError(
-                "Agent returned no messages."
-            )
-
-        # ----------------------------------------------------
-        # Get Final Answer
-        # ----------------------------------------------------
-
-        answer = messages[-1].content
+        sources = result.get(
+            "sources",
+            [],
+        )
 
         if not answer:
+
             answer = (
                 "The agent could not generate "
-                "a final answer."
+                "an answer."
             )
 
-        if not isinstance(answer, str):
-            answer = str(answer)
+        if not isinstance(
+            answer,
+            str,
+        ):
 
-        # ----------------------------------------------------
-        # Find Tools Used
-        # ----------------------------------------------------
-
-        tools_used: list[str] = []
-
-        for message in messages:
-
-            tool_calls = getattr(
-                message,
-                "tool_calls",
-                None
+            answer = str(
+                answer
             )
 
-            if not tool_calls:
-                continue
-
-            for tool_call in tool_calls:
-
-                tool_name = tool_call.get("name")
-
-                if (
-                    tool_name
-                    and tool_name not in tools_used
-                ):
-                    tools_used.append(tool_name)
-
         # ----------------------------------------------------
-        # Find RAG Sources
-        # ----------------------------------------------------
-
-        sources: list[str] = []
-
-        for message in messages:
-
-            if not isinstance(message, ToolMessage):
-                continue
-
-            # Only extract sources from RAG tool
-            if message.name != "search_documents":
-                continue
-
-            content = str(message.content)
-
-            for line in content.splitlines():
-
-                if line.startswith("Source:"):
-
-                    source = line.replace(
-                        "Source:",
-                        "",
-                        1
-                    ).strip()
-
-                    if (
-                        source
-                        and source not in sources
-                    ):
-                        sources.append(source)
-
-        # ----------------------------------------------------
-        # Create Response
-        # ----------------------------------------------------
-
-        result = AgentQueryResponse(
-            answer=answer,
-            tools_used=tools_used,
-            sources=sources
-        )
-
-        # ----------------------------------------------------
-        # Store History
+        # Store history
         # ----------------------------------------------------
 
         history.append(
@@ -228,38 +128,426 @@ def query_agent(request: AgentQueryRequest):
                 query=request.query,
                 answer=answer,
                 tools_used=tools_used,
-                sources=sources
+                sources=sources,
             )
         )
 
-        # Keep only last 10 queries
         if len(history) > 10:
+
             del history[:-10]
 
-        return result
-
-    # --------------------------------------------------------
-    # Error Handling
-    # --------------------------------------------------------
+        return AgentQueryResponse(
+            answer=answer,
+            tools_used=tools_used,
+            sources=sources,
+        )
 
     except Exception as e:
 
-        print(f"Agent Error: {e}")
+        print(
+            f"Agent Error: {e}"
+        )
 
         raise HTTPException(
             status_code=500,
-            detail=f"Agent failed: {str(e)}"
+            detail=f"Agent failed: {str(e)}",
         )
 
 
 # ============================================================
-# 6. GET /agent/history
+# 5. WEBSOCKET STREAMING
+# ============================================================
+
+@app.websocket(
+    "/ws/agent"
+)
+async def websocket_agent(
+    websocket: WebSocket,
+):
+
+    await websocket.accept()
+
+    print(
+        "WebSocket client connected."
+    )
+
+    try:
+
+        while True:
+
+            # =================================================
+            # RECEIVE REQUEST
+            # =================================================
+
+            raw_message = (
+                await websocket.receive_text()
+            )
+
+            raw_message = raw_message.strip()
+
+            # -------------------------------------------------
+            # Parse JSON from frontend
+            # -------------------------------------------------
+
+            try:
+
+                request_data = json.loads(
+                    raw_message
+                )
+
+                question = str(
+                    request_data.get(
+                        "query",
+                        "",
+                    )
+                ).strip()
+
+                model_type = request_data.get(
+                    "model_type",
+                    "finetuned",
+                )
+
+            except json.JSONDecodeError:
+
+                # ------------------------------------------------
+                # Backward compatibility:
+                # If a plain text question is sent,
+                # use fine-tuned model.
+                # ------------------------------------------------
+
+                question = raw_message
+
+                model_type = "finetuned"
+
+            # =================================================
+            # VALIDATE MODEL
+            # =================================================
+
+            if model_type not in [
+                "base",
+                "finetuned",
+            ]:
+
+                await websocket.send_json(
+                    {
+                        "type": "error",
+                        "message": (
+                            "Invalid model_type. "
+                            "Use 'base' or 'finetuned'."
+                        ),
+                    }
+                )
+
+                continue
+
+            # =================================================
+            # MODEL NAME
+            # =================================================
+
+            if model_type == "base":
+
+                model_name = (
+                    "Base Qwen "
+                    "(Qwen2.5-1.5B-Instruct)"
+                )
+
+            else:
+
+                model_name = (
+                    "Fine-tuned Qwen "
+                    "(QLoRA)"
+                )
+
+            # =================================================
+            # LOG REQUEST
+            # =================================================
+
+            print(
+                f"WebSocket question: {question}"
+            )
+
+            print(
+                f"Selected model: {model_type}"
+            )
+
+            # =================================================
+            # EXIT
+            # =================================================
+
+            if question.lower() == "exit":
+
+                await websocket.send_json(
+                    {
+                        "type": "close",
+                        "message": "Goodbye!",
+                    }
+                )
+
+                await websocket.close()
+
+                break
+
+            # =================================================
+            # EMPTY QUESTION
+            # =================================================
+
+            if not question:
+
+                await websocket.send_json(
+                    {
+                        "type": "error",
+                        "message": (
+                            "Question cannot be empty."
+                        ),
+                    }
+                )
+
+                continue
+
+            # =================================================
+            # START
+            # =================================================
+
+            await websocket.send_json(
+                {
+                    "type": "start",
+                    "question": question,
+                    "model_type": model_type,
+                    "model_name": model_name,
+                    "prompt_version": PROMPT_VERSION,
+                }
+            )
+
+            print(
+                "WebSocket processing started."
+            )
+
+            # =================================================
+            # STREAM AGENT
+            # =================================================
+
+            final_answer = ""
+
+            tools_used = []
+
+            agent_error = False
+
+            sources = []
+
+            try:
+
+                # ------------------------------------------------
+                # IMPORTANT:
+                # Pass selected model to agent
+                # ------------------------------------------------
+
+                for event in stream_agent_answer(
+                    question,
+                    model_type=model_type,
+                ):
+
+                    if not event:
+
+                        continue
+
+                    event_type = event.get(
+                        "type"
+                    )
+
+                    # ---------------------------------------------
+                    # TOKEN
+                    # ---------------------------------------------
+
+                    if event_type == "token":
+
+                        token = event.get(
+                            "content",
+                            "",
+                        )
+
+                        if token:
+
+                            final_answer += token
+
+                            await websocket.send_json(
+                                {
+                                    "type": "token",
+                                    "content": token,
+                                }
+                            )
+
+                    # ---------------------------------------------
+                    # METADATA
+                    # ---------------------------------------------
+
+                    elif event_type == "metadata":
+
+                        tools_used = event.get(
+                            "tools_used",
+                            [],
+                        )
+
+                        sources = event.get(
+                            "sources",
+                            [],
+                        )
+
+                        prompt_version = event.get(
+                            "prompt_version",
+                            PROMPT_VERSION,
+                        )
+
+                        await websocket.send_json(
+                            {
+                                "type": "metadata",
+
+                                "tools_used": (
+                                    tools_used
+                                ),
+
+                                "sources": (
+                                    sources
+                                ),
+
+                                "prompt_version": (
+                                    prompt_version
+                                ),
+
+                                "model_type": (
+                                    model_type
+                                ),
+
+                                "model_name": (
+                                    model_name
+                                ),
+                            }
+                        )
+
+                    # ---------------------------------------------
+                    # ERROR FROM AGENT
+                    # ---------------------------------------------
+
+                    elif event_type == "error":
+
+                        error_message = event.get(
+                            "message",
+                            "Agent streaming failed.",
+                        )
+
+                        print(
+                            f"Streaming error: "
+                            f"{error_message}"
+                        )
+
+                        await websocket.send_json(
+                            {
+                                "type": "error",
+                                "message": error_message,
+                            }
+                        )
+
+                        # Stop processing only this question.
+                        # The outer WebSocket loop remains alive.
+                        agent_error = True
+                        break
+
+                # If the agent failed, wait for the next question
+                # instead of sending a misleading "done" event.
+                if agent_error:
+                    continue
+
+                # =================================================
+                # DONE
+                # =================================================
+
+                await websocket.send_json(
+                    {
+                        "type": "done",
+
+                        "model_type": model_type,
+
+                        "model_name": model_name,
+                    }
+                )
+
+                print(
+                    "WebSocket response completed."
+                )
+
+                # =================================================
+                # SAVE HISTORY
+                # =================================================
+
+                if final_answer:
+
+                    history.append(
+                        HistoryItem(
+                            query=question,
+                            answer=final_answer,
+                            tools_used=tools_used,
+                            sources=sources,
+                        )
+                    )
+
+                    if len(history) > 10:
+
+                        del history[:-10]
+
+            except Exception as e:
+
+                print(
+                    f"Streaming Agent Error: {e}"
+                )
+
+                try:
+
+                    await websocket.send_json(
+                        {
+                            "type": "error",
+                            "message": str(e),
+                        }
+                    )
+
+                except Exception:
+
+                    pass
+
+    except WebSocketDisconnect:
+
+        print(
+            "WebSocket client disconnected."
+        )
+
+    except Exception as e:
+
+        print(
+            f"WebSocket Error: {e}"
+        )
+
+        try:
+
+            await websocket.send_json(
+                {
+                    "type": "error",
+                    "message": str(e),
+                }
+            )
+
+        except Exception:
+
+            pass
+
+
+# ============================================================
+# 6. HISTORY
 # ============================================================
 
 @app.get(
     "/agent/history",
-    response_model=list[HistoryItem]
+    response_model=list[HistoryItem],
 )
 def get_history():
 
-    return list(reversed(history))
+    return list(
+        reversed(history)
+    )
