@@ -1,12 +1,20 @@
-name: Hello GitHub Actions
+name: Run Python
 
 on:
   push:
 
 jobs:
-  hello:
+  python:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Say Hello
-        run: echo "Hello from GitHub Actions!"
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run Python
+        run: python mlops-learning/hello.py
