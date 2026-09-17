@@ -1,10 +1,10 @@
-name: Run Python
+name: ML Training Pipeline
 
 on:
   push:
 
 jobs:
-  python:
+  train:
     runs-on: ubuntu-latest
 
     steps:
@@ -16,5 +16,8 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Run Python
-        run: python mlops-learning/hello.py
+      - name: Install dependencies
+        run: pip install -r mlops-learning/requirements.txt
+
+      - name: Run ML training
+        run: python mlops-learning/train.py
